@@ -7,6 +7,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { Button } from "@nextui-org/button";
 import { Controller } from "react-hook-form";
 import { Spinner } from "@nextui-org/react";
+import { cn } from "@/utils/cn";
 
 const Register = () => {
 	const { visiblePassword, handleVisiblePassword, control, handleSubmit, handleRegister, isPendingRegister, errors } = useRegister()
@@ -23,7 +24,12 @@ const Register = () => {
 					<p className="text-small mb-4">Have an account?&nbsp;
 						<Link href="/auth/login" className="font-semibold text-danger-400"></Link>
 					</p>
-					<form className="flex w-80 flex-col gap-4" onSubmit={handleSubmit(handleRegister)}>
+					{errors.root && (
+						<p className="mb-2 font-medium text-danger">
+							{errors?.root?.message}
+						</p>
+					)}
+					<form className={cn("flex w-80 flex-col gap-4", Object.keys(errors).length > 0 ? "gap-2": "gap-3")} onSubmit={handleSubmit(handleRegister)}>
 						<Controller name="fullName" control={control} render={({ field }) =>
 							<Input {...field} label="Fullname" type="text" variant="bordered" autoComplete="off" isInvalid={errors.fullName !== undefined} errorMessage={errors.fullName?.message} />
 						}></Controller>
