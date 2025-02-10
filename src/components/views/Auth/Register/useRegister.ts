@@ -47,7 +47,6 @@ const useRegister = () => {
 
   const registerService = async (payload: IRegister) => {
     const result = await authServices.register(payload);
-    console.log("🚀 ~ registerService ~ result:", result);
     return result;
   };
 

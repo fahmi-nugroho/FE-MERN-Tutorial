@@ -72,7 +72,7 @@ export default NextAuth({
       token: JWTExtendeded;
     }) {
       session.user = token.user;
-      session.accesToken = token.user?.accesToken;
+      session.accessToken = token.user?.accesToken;
 
       return session;
     },

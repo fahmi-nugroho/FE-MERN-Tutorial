@@ -24,7 +24,7 @@ interface UserExtended extends User {
 }
 
 interface SessionExtended extends Session {
-  accesToken?: string;
+  accessToken?: string;
 }
 
 interface JWTExtendeded extends JWT {
