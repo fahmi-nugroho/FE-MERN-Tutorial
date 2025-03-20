@@ -19,7 +19,7 @@ const DashboardLayout = (props: PropTypes) => {
   return (
     <>
       <PageHead title={title}></PageHead>
-      <div className="max-w-3xl 3xl:container flex">
+      <div className="2xl:container flex">
         <DashboardLayoutSidebar
           sidebarItems={type === "admin" ? SIDEBAR_ADMIN : SIDEBAR_MEMBER}
           isOpen={open}
