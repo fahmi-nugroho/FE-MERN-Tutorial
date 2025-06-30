@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -7,6 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import axios, { AxiosError } from "axios";
 import { signIn } from "next-auth/react";
+import { ToasterContext } from "@/context/ToasterContext";
 
 const loginSchema = yup.object().shape({
   identifier: yup.string().required("Please input your email / username"),
@@ -26,6 +27,7 @@ const useLogin = () => {
   });
   const [isVisible, setVisible] = useState(false);
   const toggleVisibility = () => setVisible(!isVisible);
+  const { setToaster } = useContext(ToasterContext);
 
   const callbackUrl: string = (router.query.callbackUrl as string) || "/";
 
@@ -36,22 +38,19 @@ const useLogin = () => {
       callbackUrl,
     });
     if (result?.error && result?.status === 401) {
-      throw new Error("Login Failed")
+      throw new Error("Login Failed");
     }
   };
 
   const { mutate: mutateLogin, isPending: isPendingLogin } = useMutation({
     mutationFn: loginService,
-    onError(error: Error | AxiosError) {
-      setError("root", {
-        message: axios.isAxiosError(error)
-          ? error.response?.data?.message
-          : error.message,
-      });
+    onError: () => {
+      setToaster({ type: "error", message: "Your credential is wrong" });
     },
     onSuccess: () => {
-      router.push(callbackUrl);
       reset();
+      setToaster({ type: "success", message: "Login success" });
+      router.push(callbackUrl);
     },
   });
 
