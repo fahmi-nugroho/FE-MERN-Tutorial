@@ -1,5 +1,5 @@
 import { LIMIT_LISTS } from "@/constants/list.constant";
-import { cn } from "@/utils/cn";
+import { cn } from "../../../../utils/cn";
 import {
   Button,
   Input,

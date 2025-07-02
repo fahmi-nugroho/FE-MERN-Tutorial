@@ -1,4 +1,4 @@
-import { cn } from "@/utils/cn";
+import { cn } from "../../../../../utils/cn";
 import { Button, Listbox, ListboxItem } from "@nextui-org/react";
 import { signOut } from "next-auth/react";
 import Image from "next/image";

@@ -7,7 +7,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { Button } from "@nextui-org/button";
 import { Controller } from "react-hook-form";
 import { Spinner } from "@nextui-org/react";
-import { cn } from "@/utils/cn";
+import { cn } from "../../../../../utils/cn";
 
 const Register = () => {
   const {
